@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:37:46 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/23 21:13:27 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/25 22:46:58 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Print Error and free the chunk_linked_list
 //		ft_lstclear(&chunk);
-static void	ft_error(t_chunk *chunk)
+void	ft_error(t_chunk *chunk)
 {
 	write(1, "Error\n", 6);
 	if (chunk)
@@ -23,29 +23,38 @@ static void	ft_error(t_chunk *chunk)
 
 int	main(int argc, char **argv)
 {
-	int		*stack_a;
-	int		*stack_b;
-	t_chunk	*chunk;
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+	t_chunk		*chunk;
 
 	if (argc == 1)
 		return (0);
 	chunk = malloc(sizeof(t_chunk));
-	ft_initialise_chunk(chunk, "TOTAL");
-	stack_a = ft_check_argv(argc, argv, chunk);
-	if (!stack_a)
-		ft_error(chunk);
-	else
-	{
-		ft_print_chunk(chunk);
-		ft_print_stack(stack_a, argc);
-	}
-	stack_b = ft_calloc(argc, sizeof(int));
+	if (!chunk)
+		return (0);
+	stack_a = ft_import_argv(chunk, argc, argv);
+	stack_b = ft_calloc(argc, sizeof(t_stack));
 	if (!stack_b)
 	{
-		free(stack_a);
-		return (NULL);
+		ft_free(1, stack_a);
+		ft_lstclear(&chunk);
+		return (0);
 	}
-	free(stack_a);
-	free(stack_b);
-	return (0);
+	ft_print_stack(stack_a);
+	ft_free(2, stack_a, stack_b);
+	ft_lstclear(&chunk);
+	return (1);
+}
+
+void	ft_free(int how_many, ...)
+{
+	va_list	args;
+
+	va_start(args, how_many);
+	while (how_many > 0)
+	{
+		free(va_arg(args, int *));
+		how_many--;
+	}
+	va_end(args);
 }

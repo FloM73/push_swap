@@ -6,26 +6,30 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:37:46 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/23 21:00:18 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/25 22:31:43 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
 // Fill the stack & Check if there are double
-static int	ft_fill_stack_a(int *stack, int position, int nb)
+static int	ft_fill_stack_a(t_stack *stack, int position, int nb)
 {
 	int	i;
 
 	i = 0;
 	while (i < position)
 	{
-		 if (stack[i] == nb)
+		if (stack->elt[i] == nb)
+		{
+			ft_free(1, stack);
 			return (0);
+		}
 		else
 			i++;
 	}
-	stack[position] = nb;
+	stack->elt[position] = nb;
+	stack->size = position + 1;
 	return (1);
 }
 
@@ -60,30 +64,56 @@ static int	ft_extract_number(char *argv, int	*nb)
 }
 
 // Screen argv, create first Chunk, fill stack_a
-int	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
+static t_stack	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
 {
-	int	i;
-	int	nb;
-	int	*stack;
+	int		i;
+	int		nb;
+	t_stack	*stack;
 
-	stack = ft_calloc(argc, sizeof(int));
+	stack = ft_calloc(1, sizeof(t_stack));
+	stack->elt = ft_calloc(argc, sizeof(t_stack));
 	if (!stack)
 		return (NULL);
 	i = 1;
 	while (i < argc)
 	{
 		if (ft_extract_number(argv[i], &nb) == 0)
+		{
+			ft_free(1, stack);
 			return (NULL);
+		}
 		else
 		{
 			ft_implemente_chunk(chunk, nb);
 			if (ft_fill_stack_a(stack, i - 1, nb) == 0)
-			{
-				free(stack);
 				return (NULL);
-			}
 			i++;
 		}
 	}
 	return (stack);
+}
+
+// If arguments are OK: evtl. exit if already sorted other create all the chunks
+t_stack	*ft_import_argv(t_chunk	*chunk, int argc, char **argv)
+{
+	t_stack	*stack_a;
+
+	ft_initialise_chunk(chunk, "TOTAL");
+	stack_a = ft_check_argv(argc, argv, chunk);
+	if (!stack_a)
+	{
+		ft_error(chunk);
+		exit(0);
+	}
+	else
+	{
+		ft_print_stack(stack_a);
+		if (ft_check_order(stack_a) == stack_a->size)
+		{
+			ft_free(1, stack_a);
+			exit (0);
+		}
+		ft_pilote_create_chunk(chunk, stack_a);
+	}
+	return (stack_a);
 }
