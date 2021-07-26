@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:37:46 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/25 22:31:43 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/26 22:44:54 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,16 @@ t_stack	*ft_import_argv(t_chunk	*chunk, int argc, char **argv)
 
 	ft_initialise_chunk(chunk, "TOTAL");
 	stack_a = ft_check_argv(argc, argv, chunk);
-	if (!stack_a)
+	write(1, "ORIGINAL\n", 9);
+	ft_print_stack(stack_a, 'A');
+	if (!stack_a || !stack_a->elt)
 	{
 		ft_error(chunk);
 		exit(0);
 	}
 	else
 	{
-		ft_print_stack(stack_a);
+		//ft_print_stack(stack_a, 'A');
 		if (ft_check_order(stack_a) == stack_a->size)
 		{
 			ft_free(1, stack_a);

@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/25 21:28:59 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/26 14:04:56 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_order(t_stack *stack)
 		if (stack->elt[i] < stack->elt[i + 1])
 			i++;
 		else
-			return (i);
+			return (0);
 	}
 	return (i + 1);
 }

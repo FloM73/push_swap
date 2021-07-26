@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 18:06:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/25 22:46:33 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/27 01:20:43 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	ft_fill_chunk(t_chunk *first, t_stack *stack)
 			next_chk = next_chk->next;
 		}
 		next_chk->nb_elt_total = next_chk->nb_elt_total + 1;
+		next_chk->summe += stack->elt[i];
 		i++;
 	}
 }
@@ -67,14 +68,16 @@ void	ft_pilote_create_chunk(t_chunk *first, t_stack *stack)
 	int		nb_chk;
 	t_chunk	*mid_chk;
 
-	average = first->nb_elt_curent / first->nb_elt_total;
-	if (first->nb_elt_total >= 50)
-		nb_chk = first->nb_elt_total / 10;
+	average = first->summe / first->nb_elt_total;
+	if (first->nb_elt_total > 100)
+		nb_chk = first->nb_elt_total / 35;
+	else if (first->nb_elt_total > 50)
+		nb_chk = first->nb_elt_total / 11;
 	else if (first->nb_elt_total >= 20)
 		nb_chk = first->nb_elt_total / 5;
 	else if (first->nb_elt_total >= 9)
 		nb_chk = 3;
-	else if (first->nb_elt_total >= 6)
+	else if (first->nb_elt_total >= 4)
 		nb_chk = 1;
 	else
 	{
@@ -87,6 +90,6 @@ void	ft_pilote_create_chunk(t_chunk *first, t_stack *stack)
 		nb_chk = (nb_chk) / 2 + (nb_chk % 2);
 		ft_create_chk(mid_chk, nb_chk, average + 1, first->max);
 		ft_fill_chunk(first, stack);
-		ft_print_chunk(first);	//norme OK sans elle
+		//ft_print_chunk(first);	//norme OK sans elle
 	}
 }

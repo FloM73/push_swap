@@ -6,7 +6,7 @@
 #    By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/18 22:32:44 by flormich          #+#    #+#              #
-#    Updated: 2021/07/25 20:58:07 by flormich         ###   ########.fr        #
+#    Updated: 2021/07/26 20:56:40 by flormich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC_LIB = $(DIR_LIB)/ft_memset.c $(DIR_LIB)/ft_bzero.c $(DIR_LIB)/ft_memcpy.c \
 		$(DIR_LIB)/ft_strmapi.c $(DIR_LIB)/ft_putchar_fd.c $(DIR_LIB)/ft_putstr_fd.c \
 		$(DIR_LIB)/ft_putendl_fd.c $(DIR_LIB)/ft_putnbr_fd.c
 SRC = ft_push_swap.c ft_link_chunk.c ft_check_argv.c ft_check_order.c \
-	ft_create_all_chunk.c ft_sort.c ft_swap.c ft_push.c ft_rotate.c ft_rrotate.c \
+	ft_create_all_chunk.c ft_sort.c ft_move_chunk_to_b.c ft_move_chunk_back_to_a.c \
+	ft_swap.c ft_push.c ft_rotate.c ft_rrotate.c \
 	ft_print_HELP.c
 
 OBJ = $(SRC:.c=.o)
