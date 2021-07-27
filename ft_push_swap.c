@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:37:46 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 18:19:16 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 00:05:53 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 	if (!chunk)
 		return (0);
 	stack_a = ft_import_argv(chunk, argc, argv);
+	ft_print_stack(stack_a, 'A');
 	if (ft_check_order(stack_a) == 0)
 	{
 		ft_pilote_create_chunk(chunk, stack_a);

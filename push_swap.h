@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:12:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 18:22:47 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/27 21:28:43 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_chunk
 	int				chk_nr;
 	int				min;
 	int				max;
+	int				min_ist;
+	int				max_ist;
 	long int		summe;
 	int				nb_elt_total;
 	int				nb_elt_curent;
@@ -65,7 +67,9 @@ t_stack	*ft_send_a_to_b(t_stack *a, t_chunk *chk);
 // ft_send_b_to_a (incl. 2 statics)
 void	ft_send_b_to_a(t_stack *a, t_stack *b, t_chunk *chk);
 // ft_send_b_to_a_100 - 100 NUMBER MAXI (incl. 2 statics)
-void	ft_send_b_to_a_100(t_stack *a, t_stack *b, t_chunk *chk);
+int		ft_count_elt_big(t_stack *s, t_chunk*chk);
+void	ft_move_chk_b_to_a_big(t_stack *a, t_stack *b, t_chunk *chk);
+void	ft_move_chk_b_to_a_biggest(t_stack *a, t_stack *b, t_chunk *chk);
 //ft_sort (incl. 2 statics)
 void	ft_quick_sort(t_stack *a);
 //Movement (each one file)

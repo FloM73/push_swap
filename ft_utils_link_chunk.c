@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 21:00:09 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 18:00:29 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/27 18:54:19 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	ft_implemente_chunk(t_chunk *chunk, int nb)
 		chunk->min = nb;
 	if (nb > chunk->max)
 		chunk->max = nb;
+	if (nb < chunk->min_ist)
+		chunk->min_ist = nb;
+	if (nb > chunk->max_ist)
+		chunk->max_ist = nb;
 	chunk->nb_elt_total = chunk->nb_elt_total + 1;
 	chunk->summe = chunk->summe + nb;
 }
@@ -48,6 +52,8 @@ void	ft_initialise_chunk(t_chunk *chunk, int chk_nr)
 	chunk->chk_nr = chk_nr;
 	chunk->min = 32768;
 	chunk->max = -32767;
+	chunk->min_ist = 32768;
+	chunk->max_ist = -32767;
 	chunk->nb_elt_total = 0;
 	chunk->nb_elt_curent = 0;
 	chunk->previous = NULL;

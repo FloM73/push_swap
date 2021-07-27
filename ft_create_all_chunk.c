@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 18:06:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 18:14:58 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/27 21:22:14 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ static void	ft_fill_chunk(t_chunk *first, t_stack *stack)
 		{
 			next_chk = next_chk->next;
 		}
-		next_chk->nb_elt_total = next_chk->nb_elt_total + 1;
-		next_chk->summe += stack->elt[i];
+		ft_implemente_chunk(next_chk, stack->elt[i]);
+		//next_chk->nb_elt_total = next_chk->nb_elt_total + 1;
+		//next_chk->summe += stack->elt[i];
 		i++;
 	}
 }
@@ -49,6 +50,8 @@ t_chunk	*ft_create_chk(t_chunk *first, int nb, int min, int max)
 		{
 			chunk_last = ft_find_last(first);
 			chunk_new->chk_nr = i + nb_is;
+			chunk_new->min_ist = 32768;
+			chunk_new->max_ist = -32767;
 			if (i == 1)
 				chunk_new->min = min;
 			else
@@ -91,5 +94,5 @@ void	ft_pilote_create_chunk(t_chunk *first, t_stack *stack_a)
 	nb_chk = (nb_chk) / 2 + (nb_chk % 2);
 	ft_create_chk(mid_chk, nb_chk, average + 1, first->max);
 	ft_fill_chunk(first, stack_a);
-	//ft_print_chunk(first);
+	ft_print_chunk(first);
 }

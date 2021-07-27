@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 14:25:28 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 18:02:32 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 00:55:48 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void ft_move_from_top(t_stack *a, t_stack *b, t_chunk *chk)
 			ft_pilote_push(a, b, PB);
 			chk->nb_elt_curent++;
 		}
+		if (b->elt[0] == chk->max_ist && b->size > 1)
+			ft_pilote_rotate(NULL, b, RB);
 	}
 }
 
@@ -62,9 +64,12 @@ static void ft_move_from_bottom(t_stack *a, t_stack *b, t_chunk *chk)
 			ft_pilote_push(a, b, PB);
 			chk->nb_elt_curent++;
 		}
+		if (b->elt[0] == chk->max_ist && b->size > 1)
+			ft_pilote_rotate(NULL, b, RB);
 	}
 }
 
+// Put always the biggest from the chunk at the begining
 static void	ft_move_chk(t_stack *a, t_stack *b, t_chunk *chk)
 {
 	int	index_first;
@@ -88,8 +93,10 @@ static void	ft_move_chk(t_stack *a, t_stack *b, t_chunk *chk)
 		else
 			ft_move_from_bottom(a, b, chk);
 	}
-	if (chk->nb_elt_total == 2 && b->elt[0] < b->elt[1])
-		ft_pilote_swap(NULL, b, SB);
+	if (b->size > 1)
+		ft_pilote_rrotate(NULL, b, RRB);
+	//if (chk->nb_elt_total == 2 && b->elt[0] < b->elt[1])
+	//	ft_pilote_swap(NULL, b, SB);
 	//ft_print_stack(a, 'A');
 	//ft_print_stack(b, 'B');
 }
