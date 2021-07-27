@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:12:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/26 23:37:43 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/27 18:22:47 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_chunk
 {
-	char			*name;
+	int				chk_nr;
 	int				min;
 	int				max;
 	long int		summe;
@@ -54,37 +54,36 @@ enum e_mouvement
 };
 
 // Main (ft_push_swap.c)
-void	ft_error(t_chunk *chunk);
-void	ft_free(int how_many, ...);
-//ft_check_argv & if already sorted + 4 static
+
+//ft_check_argv & if already sorted (incl. 3 statics)
 t_stack	*ft_import_argv(t_chunk *chunk, int argc, char **argv);
-// ft_link_chunk.c: function dealing with the link-list and the first chunk
-void	ft_lstclear(t_chunk **lst);
-void 	ft_implemente_chunk(t_chunk *chunk, int nb);
-void	ft_initialise_chunk(t_chunk *chunk, char *name);
-t_chunk	*ft_find_last(t_chunk *lst);
-//ft_create_all_chunk: create the other chunks + statics
+//ft_create_all_chunk: create the other chunks (incl. 1 static)
 void	ft_pilote_create_chunk(t_chunk *first, t_stack *stack);
 t_chunk	*ft_create_chk(t_chunk *first, int nb, int min, int max);
-//ft_check_order
+//ft_send_a-to_b (incl. 3 statics)
+t_stack	*ft_send_a_to_b(t_stack *a, t_chunk *chk);
+// ft_send_b_to_a (incl. 2 statics)
+void	ft_send_b_to_a(t_stack *a, t_stack *b, t_chunk *chk);
+// ft_send_b_to_a_100 - 100 NUMBER MAXI (incl. 2 statics)
+void	ft_send_b_to_a_100(t_stack *a, t_stack *b, t_chunk *chk);
+//ft_sort (incl. 2 statics)
+void	ft_quick_sort(t_stack *a);
+//Movement (each one file)
+void	ft_pilote_swap(t_stack *stack_a, t_stack *stack_b, int	which);
+void	ft_pilote_rotate(t_stack *stack_a, t_stack *stack_b, int	which);
+void	ft_pilote_rrotate(t_stack *stack_a, t_stack *stack_b, int	which);
+void	ft_pilote_push(t_stack *stack_a, t_stack *stack_b, int	which);
+//ft_utils
+t_stack	*ft_create_stack_b(t_stack *stack_a);
 int		ft_check_order(t_stack *stack);
+void	ft_error(t_chunk *chunk);
+void	ft_free(int how_many, ...);
+// ft_util_link_chunk.c: function dealing with the link-list and the first chunk
+void	ft_lstclear(t_chunk **lst);
+void 	ft_implemente_chunk(t_chunk *chunk, int nb);
+void	ft_initialise_chunk(t_chunk *chunk, int chk_nr);
+t_chunk	*ft_find_last(t_chunk *lst);
 // ft_print_HELP    A NE PAS SOUMETTRE
 void	ft_print_chunk(t_chunk *chunk);
 void	ft_print_stack(t_stack	*stack_a, char laquelle);
-//ft_sort
-void	ft_quick_sort(t_stack *stack);
-void	ft_quick_sort_3(t_stack *stack);
-void	ft_send_chk_to(t_stack *a, t_stack *b, t_chunk *chunk);
-void	ft_send_chk_back(t_stack *a, t_stack *b, t_chunk *chunk);
-//ft_swap
-void	ft_pilote_swap(t_stack *stack_a, t_stack *stack_b, int	which);
-//ft_rotate
-void	ft_pilote_rotate(t_stack *stack_a, t_stack *stack_b, int	which);
-//ft_rrotate
-void	ft_pilote_rrotate(t_stack *stack_a, t_stack *stack_b, int	which);
-//ft_push
-void	ft_pilote_push(t_stack *stack_a, t_stack *stack_b, int	which);
-//ft_move_chunk
-void	ft_move_chk_a_to_b(t_stack *a, t_stack *b, t_chunk *chk);
-void	ft_move_chk_b_to_a(t_stack *a, t_stack *b, t_chunk *chk);
 #endif
