@@ -6,13 +6,13 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 13:13:10 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 15:21:07 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Check asceding order from the stack
+// Check asceding order (stack A)
 int	ft_check_order(t_stack *stack)
 {
 	int	i;
@@ -45,18 +45,4 @@ void	ft_error(t_chunk *chunk)
 	write(1, "Error\n", 6);
 	if (chunk)
 		ft_lstclear(&chunk);
-}
-
-// Free the stacks
-void	ft_free(int how_many, ...)
-{
-	va_list	args;
-
-	va_start(args, how_many);
-	while (how_many > 0)
-	{
-		free(va_arg(args, int *));
-		how_many--;
-	}
-	va_end(args);
 }

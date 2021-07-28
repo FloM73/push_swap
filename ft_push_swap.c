@@ -6,14 +6,11 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:37:46 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 00:05:53 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:04:36 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
-
-// Print Error and free the chunk_linked_list
-//		ft_lstclear(&chunk);
 
 int	main(int argc, char **argv)
 {
@@ -31,7 +28,7 @@ int	main(int argc, char **argv)
 	ft_print_stack(stack_a, 'A');
 	if (ft_check_order(stack_a) == 0)
 	{
-		ft_pilote_create_chunk(chunk, stack_a);
+		ft_pilote_create_all_chunk(chunk, stack_a);
 		stack_b = ft_send_a_to_b(stack_a, chunk);
 		if (stack_b)
 			ft_send_b_to_a(stack_a, stack_b, ft_find_last(chunk));
@@ -40,7 +37,15 @@ int	main(int argc, char **argv)
 		write(1, "ZUT\n", 4);
 	else
 		write(1, "TRI OK!\n", 8);
-	ft_free(2, stack_a, stack_b);
+	free(stack_a);
+	free(stack_b);
 	ft_lstclear(&chunk);
 	return (1);
 }
+
+/*
+	if (ft_check_order(stack_a) == 0)
+		write(1, "ZUT\n", 4);
+	else
+		write(1, "TRI OK!\n", 8);
+		*/

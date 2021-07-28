@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 18:06:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 21:22:14 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:02:16 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,19 @@ static void	ft_fill_chunk(t_chunk *first, t_stack *stack)
 			next_chk = next_chk->next;
 		}
 		ft_implemente_chunk(next_chk, stack->elt[i]);
-		//next_chk->nb_elt_total = next_chk->nb_elt_total + 1;
-		//next_chk->summe += stack->elt[i];
 		i++;
 	}
 }
 
-t_chunk	*ft_create_chk(t_chunk *first, int nb, int min, int max)
+static int	ft_find_min(int	chk_pos, int min, int last_max)
+{
+	if (chk_pos == 1)
+		return (min);
+	else
+		return (last_max + 1);
+}
+
+static t_chunk	*ft_create_chk(t_chunk *first, int how_many, int min, int max)
 {
 	int		i;
 	int		nb_is;
@@ -43,24 +49,18 @@ t_chunk	*ft_create_chk(t_chunk *first, int nb, int min, int max)
 
 	nb_is = first->chk_nr;
 	i = 1;
-	while (i <= nb)
+	while (i <= how_many)
 	{
 		chunk_new = (t_chunk *)malloc(sizeof(t_chunk));
 		if (chunk_new)
 		{
 			chunk_last = ft_find_last(first);
-			chunk_new->chk_nr = i + nb_is;
-			chunk_new->min_ist = 32768;
-			chunk_new->max_ist = -32767;
-			if (i == 1)
-				chunk_new->min = min;
-			else
-				chunk_new->min = chunk_last->max + 1;
-			if (i == nb)
+			ft_initialise_chunk(chunk_new, i + nb_is, chunk_last);
+			chunk_new->min = ft_find_min(i, min, chunk_last->max);
+			if (i == how_many)
 				chunk_new->max = max;
 			else
-				chunk_new->max = chunk_new->min + (max - min) / nb;
-			chunk_new->previous = chunk_last;
+				chunk_new->max = chunk_new->min + (max - min) / how_many;
 			chunk_last->next = chunk_new;
 			i++;
 		}
@@ -68,7 +68,7 @@ t_chunk	*ft_create_chk(t_chunk *first, int nb, int min, int max)
 	return (chunk_new);
 }
 
-void	ft_pilote_create_chunk(t_chunk *first, t_stack *stack_a)
+void	ft_pilote_create_all_chunk(t_chunk *first, t_stack *stack_a)
 {
 	int		average;
 	int		nb_chk;
@@ -77,7 +77,7 @@ void	ft_pilote_create_chunk(t_chunk *first, t_stack *stack_a)
 	if (first->nb_elt_total <= 3)
 	{
 		ft_quick_sort(stack_a);
-		return;
+		return ;
 	}
 	average = first->summe / first->nb_elt_total;
 	if (first->nb_elt_total > 499)
@@ -86,13 +86,13 @@ void	ft_pilote_create_chunk(t_chunk *first, t_stack *stack_a)
 		nb_chk = first->nb_elt_total / 11;
 	else if (first->nb_elt_total >= 20)
 		nb_chk = first->nb_elt_total / 5;
-	else if (first->nb_elt_total == -1)
-		nb_chk = 3;
 	else
 		nb_chk = 2;
-	mid_chk = ft_create_chk(first, nb_chk/ 2, first->min, average);
-	nb_chk = (nb_chk) / 2 + (nb_chk % 2);
-	ft_create_chk(mid_chk, nb_chk, average + 1, first->max);
-	ft_fill_chunk(first, stack_a);
-	ft_print_chunk(first);
+	mid_chk = ft_create_chk(first, nb_chk / 2, first->min, average);
+	if (mid_chk)
+	{
+		nb_chk = (nb_chk) / 2 + (nb_chk % 2);
+		ft_create_chk(mid_chk, nb_chk, average + 1, first->max);
+		ft_fill_chunk(first, stack_a);
+	}
 }

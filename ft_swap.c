@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:30:12 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/26 22:40:47 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 18:29:06 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,4 @@ void	ft_pilote_swap(t_stack *stack_a, t_stack *stack_b, int	which)
 		write(1, "sb\n", 3);
 	else
 		write(1, "ss\n", 3);
-/*	write(1, "\nAFTER SWAP\n", 12);
-	if (stack_a)
-		ft_print_stack(stack_a, 'A');
-	if (stack_b)
-		ft_print_stack(stack_b, 'B');*/
 }

@@ -6,11 +6,15 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:30:12 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/26 23:22:23 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 16:22:40 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
+
+/*	write(1, "\nAFTER PUSH\n", 12);
+	ft_print_stack(stack_a, 'A');
+	ft_print_stack(stack_b, 'B');*/
 
 static void	ft_push(t_stack *from, t_stack *to)
 {
@@ -46,8 +50,4 @@ void	ft_pilote_push(t_stack *stack_a, t_stack *stack_b, int	which)
 		write(1, "pb\n", 3);
 	else
 		write(1, "err PA/PB\n", 10);
-/*	write(1, "\nAFTER PUSH\n", 12);
-	ft_print_stack(stack_a, 'A');
-	ft_print_stack(stack_b, 'B');*/
-
 }

@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:37:46 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/27 18:03:52 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 18:40:20 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_fill_stack_a(t_stack *stack, int position, int nb)
 	{
 		if (stack->elt[i] == nb)
 		{
-			ft_free(1, stack);
+			free(stack);
 			return (0);
 		}
 		else
@@ -33,7 +33,7 @@ static int	ft_fill_stack_a(t_stack *stack, int position, int nb)
 	return (1);
 }
 
-// Extract number von argv
+// Extract number von argv and check if they are all digits
 static int	ft_extract_number(char *argv, int	*nb)
 {
 	int		j;
@@ -63,7 +63,7 @@ static int	ft_extract_number(char *argv, int	*nb)
 	return (1);
 }
 
-// Screen argv, create first Chunk, fill stack_a
+// Pilote: screen argv, create first Chunk, fill stack_a
 static t_stack	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
 {
 	int		i;
@@ -79,7 +79,7 @@ static t_stack	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
 	{
 		if (ft_extract_number(argv[i], &nb) == 0)
 		{
-			ft_free(1, stack);
+			free(stack);
 			return (NULL);
 		}
 		else
@@ -93,22 +93,18 @@ static t_stack	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
 	return (stack);
 }
 
-// If arguments are OK: evtl. exit if already sorted other create all the chunks
+// If arguments are OK return stack_a
+// Evtl. exit if error or already sorted
 t_stack	*ft_import_argv(t_chunk	*chunk, int argc, char **argv)
 {
 	t_stack	*stack_a;
 
-	ft_initialise_chunk(chunk, 0);
+	ft_initialise_chunk(chunk, 0, NULL);
 	stack_a = ft_check_argv(argc, argv, chunk);
 	if (!stack_a || !stack_a->elt)
 	{
 		ft_error(chunk);
-		exit(0);
+		return (NULL);
 	}
-	else
-	{
-		//write(1, "ORIGINAL\n", 9);
-		//ft_print_stack(stack_a, 'A');
-		return (stack_a);
-	}
+	return (stack_a);
 }

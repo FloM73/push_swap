@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 14:25:28 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 00:55:48 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:08:10 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,21 @@ static int	ft_find_member(t_stack *s, t_chunk *chk, int first)
 	if (first == 1)
 	{
 		i = 0;
-		while ((s->elt[i] < chk->min || s->elt[i] > chk->max) && i < s->size -1)
+		while ((s->elt[i] < chk->min || s->elt[i] > chk->max)
+			&& i < s->size - 1)
 			i++;
 		return (i);
 	}
 	else
 	{
-		i =  s->size -1;
+		i = s->size - 1;
 		while ((s->elt[i] < chk-> min || s->elt[i] > chk->max) && i >= 0)
 			i--;
 		return (s->size - 1 - i);
 	}
 }
 
-static void ft_move_from_top(t_stack *a, t_stack *b, t_chunk *chk)
+static void	ft_move_from_top(t_stack *a, t_stack *b, t_chunk *chk)
 {
 	while (chk->nb_elt_curent < chk->nb_elt_total)
 	{
@@ -49,7 +50,7 @@ static void ft_move_from_top(t_stack *a, t_stack *b, t_chunk *chk)
 	}
 }
 
-static void ft_move_from_bottom(t_stack *a, t_stack *b, t_chunk *chk)
+static void	ft_move_from_bottom(t_stack *a, t_stack *b, t_chunk *chk)
 {
 	int	i;
 
@@ -69,7 +70,8 @@ static void ft_move_from_bottom(t_stack *a, t_stack *b, t_chunk *chk)
 	}
 }
 
-// Put always the biggest from the chunk at the begining
+// Pilote the screening of stack_a
+// In an ascending or descending order according to the less movement needed
 static void	ft_move_chk(t_stack *a, t_stack *b, t_chunk *chk)
 {
 	int	index_first;
@@ -81,12 +83,9 @@ static void	ft_move_chk(t_stack *a, t_stack *b, t_chunk *chk)
 		index_last = ft_find_member(a, chk, 0);
 		if (index_first == 0 && index_last == 0 && chk->next != NULL)
 		{
-			//ft_print_stack(a, 'A');
-			while (a->elt[a->size -1] >= chk->min && a->elt[a->size -1] <= chk->max)
-			{
+			while (a->elt[a->size - 1] >= chk->min
+				&& a->elt[a->size - 1] <= chk->max)
 				ft_pilote_rrotate(a, NULL, RRA);
-				//ft_print_stack(a, 'A');
-			}
 		}
 		if (index_first <= index_last)
 			ft_move_from_top(a, b, chk);
@@ -95,10 +94,6 @@ static void	ft_move_chk(t_stack *a, t_stack *b, t_chunk *chk)
 	}
 	if (b->size > 1)
 		ft_pilote_rrotate(NULL, b, RRB);
-	//if (chk->nb_elt_total == 2 && b->elt[0] < b->elt[1])
-	//	ft_pilote_swap(NULL, b, SB);
-	//ft_print_stack(a, 'A');
-	//ft_print_stack(b, 'B');
 }
 
 // Send a to b, chunk after chunk
@@ -110,7 +105,7 @@ t_stack	*ft_send_a_to_b(t_stack *a, t_chunk *chunk)
 	b = ft_create_stack_b(a);
 	if (!b || !b->elt)
 	{
-		ft_free(1, a);
+		free(a);
 		ft_lstclear(&chunk);
 		return (NULL);
 	}
@@ -120,14 +115,11 @@ t_stack	*ft_send_a_to_b(t_stack *a, t_chunk *chunk)
 		if (chk->nb_elt_total <= 3 && chk->next == NULL)
 		{
 			ft_quick_sort(a);
-			break;
+			break ;
 		}
 		else
 			ft_move_chk(a, b, chk);
-		if (chk->next != NULL)
-			chk = chk->next;
-		else
-			break;
+		chk = chk->next;
 	}
 	return (b);
 }
