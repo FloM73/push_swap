@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:30:12 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 16:22:40 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:58:06 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,4 @@ void	ft_pilote_push(t_stack *stack_a, t_stack *stack_b, int	which)
 		write(1, "pa\n", 3);
 	else if (which == PB)
 		write(1, "pb\n", 3);
-	else
-		write(1, "err PA/PB\n", 10);
 }

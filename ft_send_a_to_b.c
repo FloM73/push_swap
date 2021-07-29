@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 14:25:28 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 19:08:10 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/29 16:15:23 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ t_stack	*ft_send_a_to_b(t_stack *a, t_chunk *chunk)
 		ft_lstclear(&chunk);
 		return (NULL);
 	}
+	if (chunk->nb_elt_total <= 5)
+		return (ft_quick_sort_5(a, b, chunk));
 	chk = chunk->next;
 	while (chk)
 	{

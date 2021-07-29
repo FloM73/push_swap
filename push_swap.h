@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:12:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 19:26:04 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/29 16:03:32 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_send_b_to_a(t_stack *a, t_stack *b, t_chunk *chk);
 
 //ft_quick_sort to sort <= 3 numbers (incl. 2 statics)
 void	ft_quick_sort(t_stack *a);
+void	*ft_quick_sort_5(t_stack *a, t_stack *b, t_chunk *chk);
 
 //Movement (each one file)
 void	ft_pilote_swap(t_stack *stack_a, t_stack *stack_b, int	which);

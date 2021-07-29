@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 18:06:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 19:02:16 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/29 15:16:44 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_pilote_create_all_chunk(t_chunk *first, t_stack *stack_a)
 		ft_quick_sort(stack_a);
 		return ;
 	}
-	average = first->summe / first->nb_elt_total;
+	average = first->sum / first->nb_elt_total;
 	if (first->nb_elt_total > 499)
 		nb_chk = first->nb_elt_total / 30;
 	else if (first->nb_elt_total > 50)

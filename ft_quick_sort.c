@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:26:41 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 18:28:37 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/29 16:33:01 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,41 @@ void	ft_quick_sort(t_stack *a)
 		else if (a->size == 3)
 			ft_quick_sort_3(a);
 	}
+}
+
+static void	ft_insert_b_in_a(t_stack *a, t_stack *b)
+{
+	while (a->elt[0] < b->elt[0])
+		ft_pilote_rotate(a, NULL, RA);
+	ft_pilote_push(a, b, PA);
+	while (a->elt[a->size - 1] < a->elt[0])
+		ft_pilote_rrotate(a, NULL, RRA);
+	ft_pilote_push(a, b, PA);
+}
+
+// Can be 4 or 5 element
+void	*ft_quick_sort_5(t_stack *a, t_stack *b, t_chunk *chk)
+{
+	if (a->elt[0] > a->elt[1])
+		ft_pilote_swap(a, NULL, SA);
+	if (a->elt[a->size - 1] < a->elt[0])
+		ft_pilote_rrotate(a, NULL, RRA);
+	while (a->elt[0] != chk->min && a->elt[1] != chk->min)
+		ft_pilote_rrotate(a, NULL, RRA);
+	if (a->elt[0] > a->elt[1])
+		ft_pilote_swap(a, NULL, SA);
+	ft_pilote_push(a, b, PB);
+	if (a->size == 4)
+	{
+		if (a->elt[0] > a->elt[1])
+			ft_pilote_swap(a, NULL, SA);
+		ft_pilote_push(a, b, PB);
+	}
+	ft_quick_sort(a);
+	if (b->size == 1)
+		ft_pilote_push(a, b, PA);
+	else
+		ft_insert_b_in_a(a, b);
+	free(b);
+	return (NULL);
 }
