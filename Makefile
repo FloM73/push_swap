@@ -6,7 +6,7 @@
 #    By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/18 22:32:44 by flormich          #+#    #+#              #
-#    Updated: 2021/07/28 14:54:19 by flormich         ###   ########.fr        #
+#    Updated: 2021/07/29 20:35:54 by flormich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,9 @@ SRC_LIB = $(DIR_LIB)/ft_memset.c $(DIR_LIB)/ft_bzero.c $(DIR_LIB)/ft_memcpy.c \
 		$(DIR_LIB)/ft_itoa_with_sign.c $(DIR_LIB)/ft_itoa_without_sign.c \
 		$(DIR_LIB)/ft_strmapi.c $(DIR_LIB)/ft_putchar_fd.c $(DIR_LIB)/ft_putstr_fd.c \
 		$(DIR_LIB)/ft_putendl_fd.c $(DIR_LIB)/ft_putnbr_fd.c
-SRC = ft_push_swap.c ft_check_argv.c ft_create_all_chunk.c \
+SRC = ft_a_push_swap.c ft_check_argv.c ft_create_all_chunk.c \
 	ft_send_a_to_b.c ft_send_b_to_a.c ft_quick_sort.c \
-	ft_swap.c ft_push.c ft_rotate.c ft_rrotate.c \
+	ft_mvt_swap.c ft_mvt_push.c ft_mvt_rotate.c ft_mvt_rrotate.c \
 	ft_utils.c ft_utils_link_chunk.c ft_utils_print.c
 
 OBJ = $(SRC:.c=.o)
@@ -43,7 +43,6 @@ all: $(NAME)
 $(NAME): $(HEADER) $(OBJ) $(OBJ_LIB)
 	make all -C ./$(DIR_LIB)
 	$(CC) $(CFLAGS) $(OBJ) $(OBJ_LIB) -o $(NAME)
-	//ar rcs $(NAME) $(OBJ) $(OBJ_LIB)
 
 clean:
 	make clean -C ./$(DIR_LIB)

@@ -12,8 +12,7 @@ void	ft_print_chunk(t_chunk *chunk)
 		printf("- NB element / total  = %6d / %6d\n", chunk->nb_elt_curent, chunk->nb_elt_total);
 		printf("- Value min / max     = %6d / %6d\n", chunk->min, chunk->max);
 		printf("- Value min / max IST = %6d / %6d\n", chunk->min_ist, chunk->max_ist);
-		if (chunk->nb_elt_total != 0)
-			printf("- Somme / Moyenne     = %6ld / %6ld\n", chunk->sum, chunk->sum / chunk->nb_elt_total);
+		printf("- Somme / Moyenne     = %6ld / %6d\n", chunk->sum, chunk->average);
 		printf("- Previous <-> next   = %p <-> %p\n\n", chunk->previous, chunk->next);
 		chunk = chunk->next;
 	}

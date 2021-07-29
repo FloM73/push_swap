@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 14:25:28 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 19:26:58 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/29 20:33:52 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 static int	ft_count_elt_big(t_stack *s, t_chunk*chk)
 {
-	int	average;
 	int	i;
 	int	count;
 
-	if (chk->nb_elt_total != 0)
-		average = chk->sum / chk->nb_elt_total;
 	i = 0;
 	count = 0;
 	while (i < chk->nb_elt_total)
 	{
-		if (s->elt[i] > average)
+		if (s->elt[i] > chk->average)
 			count++;
 		i++;
 	}
@@ -96,4 +93,5 @@ void	ft_send_b_to_a(t_stack *a, t_stack *b, t_chunk *chunk)
 			chk = chk->previous;
 		}
 	}
+	free(b);
 }

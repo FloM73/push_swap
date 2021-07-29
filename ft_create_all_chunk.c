@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 18:06:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/29 15:16:44 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/29 20:01:52 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static t_chunk	*ft_create_chk(t_chunk *first, int how_many, int min, int max)
 
 void	ft_pilote_create_all_chunk(t_chunk *first, t_stack *stack_a)
 {
-	int		average;
 	int		nb_chk;
 	t_chunk	*mid_chk;
 
@@ -79,20 +78,21 @@ void	ft_pilote_create_all_chunk(t_chunk *first, t_stack *stack_a)
 		ft_quick_sort(stack_a);
 		return ;
 	}
-	average = first->sum / first->nb_elt_total;
 	if (first->nb_elt_total > 499)
 		nb_chk = first->nb_elt_total / 30;
+	else if (first->nb_elt_total > 399)
+		nb_chk = first->nb_elt_total / 20;
 	else if (first->nb_elt_total > 50)
 		nb_chk = first->nb_elt_total / 11;
 	else if (first->nb_elt_total >= 20)
 		nb_chk = first->nb_elt_total / 5;
 	else
 		nb_chk = 2;
-	mid_chk = ft_create_chk(first, nb_chk / 2, first->min, average);
+	mid_chk = ft_create_chk(first, nb_chk / 2, first->min, first->average);
 	if (mid_chk)
 	{
 		nb_chk = (nb_chk) / 2 + (nb_chk % 2);
-		ft_create_chk(mid_chk, nb_chk, average + 1, first->max);
+		ft_create_chk(mid_chk, nb_chk, first->average + 1, first->max);
 		ft_fill_chunk(first, stack_a);
 	}
 }

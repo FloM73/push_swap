@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:12:54 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/29 16:03:32 by flormich         ###   ########.fr       */
+/*   Updated: 2021/07/29 19:55:38 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_chunk
 	int				min_ist;
 	int				max_ist;
 	long int		sum;
+	int				average;
 	int				nb_elt_total;
 	int				nb_elt_curent;
 	int				nb_a_rotate;
