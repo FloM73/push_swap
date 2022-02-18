@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/08/01 22:41:47 by flormich         ###   ########.fr       */
+/*   Created: 2021/05/16 22:28:05 by flormich          #+#    #+#             */
+/*   Updated: 2021/06/06 18:49:20 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-// Check asceding order (stack A)
-int	ft_check_order(t_stack *stack)
+/*
+* Return a pointer to a new string which is a duplicate from s
+* Return NULL if the memory allocation failed
+*/
+
+char	*ft_strdup(const char *s)
 {
-	int	i;
+	char	*r;
+	int		len;
+	int		i;
 
+	len = ft_strlen(s);
+	r = (char *)malloc((sizeof(char) * (len + 1)));
+	if (!r)
+		return (NULL);
 	i = 0;
-	while (i < stack->size - 1)
+	while (i < len)
 	{
-		if (stack->elt[i] < stack->elt[i + 1])
-			i++;
-		else
-			return (0);
+		r[i] = s[i];
+		i++;
 	}
-	return (i + 1);
-}
-
-// Create stack b
-t_stack	*ft_create_stack_b(t_stack *stack_a)
-{
-	t_stack	*b;
-
-	b = ft_calloc(1, sizeof(t_stack));
-	b->elt = ft_calloc(stack_a->size, sizeof(int));
-	b->size = 0;
-	return (b);
+	r[i] = '\0';
+	return (r);
 }

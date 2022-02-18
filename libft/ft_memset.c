@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_order.c                                   :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/26 14:04:56 by flormich         ###   ########.fr       */
+/*   Created: 2021/05/13 11:49:09 by flormich          #+#    #+#             */
+/*   Updated: 2021/06/06 18:09:23 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_check_order(t_stack *stack)
+/*
+* Fills n bytes of the memory pointed by s with the constant byte c
+* return a pointer to the memory area s
+*/
+
+void	*ft_memset(void *s, int c, size_t n)
 {
-	int	i;
+	unsigned char	*output;
+	size_t			i;
 
+	if (!s)
+		return (NULL);
+	output = (unsigned char *)s;
 	i = 0;
-	while (i < stack->size - 1)
+	while (i < n)
 	{
-		if (stack->elt[i] < stack->elt[i + 1])
-			i++;
-		else
-			return (0);
+		output[i] = (unsigned char) c;
+		i++;
 	}
-	return (i + 1);
+	return ((void *)output);
 }

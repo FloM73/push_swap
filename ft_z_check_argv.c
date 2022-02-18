@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_argv.c                                    :+:      :+:    :+:   */
+/*   ft_z_check_argv.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 20:37:46 by flormich          #+#    #+#             */
-/*   Updated: 2021/08/02 11:24:48 by flormich         ###   ########.fr       */
+/*   Updated: 2021/08/02 11:39:17 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
 // Fill the stack & Check if there are double
-static int	ft_fill_stack_a(t_stack *stack, int position, int nb)
+static int	ft_z_fill_stack_a(t_stack *stack, int position, int nb)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ static int	ft_fill_stack_a(t_stack *stack, int position, int nb)
 }
 
 // Extract number von argv and check if they are all digits
-static int	ft_extract_number(char *argv, int	*nb)
+static int	ft_z_extract_number(char *argv, int	*nb)
 {
 	int		j;
 	int		sign;
@@ -64,7 +64,7 @@ static int	ft_extract_number(char *argv, int	*nb)
 }
 
 // Pilote: screen argv, create first Chunk, fill stack_a
-static t_stack	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
+static t_stack	*ft_z_check_argv(int argc, char **argv)
 {
 	int		i;
 	int		nb;
@@ -77,15 +77,14 @@ static t_stack	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_extract_number(argv[i], &nb) == 0 || nb < -32768 || nb > 32767)
+		if (ft_z_extract_number(argv[i], &nb) == 0 || nb < -32768 || nb > 32767)
 		{
 			free(stack);
 			return (NULL);
 		}
 		else
 		{
-			ft_implemente_chunk(chunk, nb);
-			if (ft_fill_stack_a(stack, i - 1, nb) == 0)
+			if (ft_z_fill_stack_a(stack, i - 1, nb) == 0)
 				return (NULL);
 			i++;
 		}
@@ -95,15 +94,14 @@ static t_stack	*ft_check_argv(int argc, char **argv, t_chunk *chunk)
 
 // If arguments are OK return stack_a
 // Evtl. exit if error or already sorted
-t_stack	*ft_import_argv(t_chunk	*chunk, int argc, char **argv)
+t_stack	*ft_z_import_argv(int argc, char **argv)
 {
 	t_stack	*stack_a;
 
-	ft_initialise_chunk(chunk, 0, NULL);
-	stack_a = ft_check_argv(argc, argv, chunk);
+	stack_a = ft_z_check_argv(argc, argv);
 	if (!stack_a || !stack_a->elt)
 	{
-		ft_error(chunk);
+		write(1, "Error\n", 6);
 		return (NULL);
 	}
 	return (stack_a);

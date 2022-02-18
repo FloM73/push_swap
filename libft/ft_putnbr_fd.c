@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/08/01 22:41:47 by flormich         ###   ########.fr       */
+/*   Created: 2021/05/21 22:12:30 by flormich          #+#    #+#             */
+/*   Updated: 2021/06/06 18:35:42 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-// Check asceding order (stack A)
-int	ft_check_order(t_stack *stack)
+/*
+* Write an integer on the file descriptor
+*/
+
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
+	char	c;
 
-	i = 0;
-	while (i < stack->size - 1)
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else
 	{
-		if (stack->elt[i] < stack->elt[i + 1])
-			i++;
+		if (n < 0)
+		{
+			write (fd, "-", 1);
+			n = n * (-1);
+		}
+		if (n < 10)
+		{
+			c = n + 48;
+			write(fd, &c, 1);
+		}
 		else
-			return (0);
+		{
+			ft_putnbr_fd(n / 10, fd);
+			c = (n % 10) + 48;
+			write(fd, &c, 1);
+		}
 	}
-	return (i + 1);
-}
-
-// Create stack b
-t_stack	*ft_create_stack_b(t_stack *stack_a)
-{
-	t_stack	*b;
-
-	b = ft_calloc(1, sizeof(t_stack));
-	b->elt = ft_calloc(stack_a->size, sizeof(int));
-	b->size = 0;
-	return (b);
 }

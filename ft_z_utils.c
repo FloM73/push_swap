@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_z_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 20:30:12 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 18:29:06 by flormich         ###   ########.fr       */
+/*   Created: 2021/08/01 23:28:16 by flormich          #+#    #+#             */
+/*   Updated: 2021/08/01 23:29:40 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-void	ft_swap(t_stack *stack)
+void	ft_write_result(t_stack *a, t_stack *b)
 {
-	int	tmp;
-
-	tmp = stack->elt[0];
-	stack->elt[0] = stack->elt[1];
-	stack->elt[1] = tmp;
-}
-
-void	ft_pilote_swap(t_stack *stack_a, t_stack *stack_b, int	which)
-{
-	if (which == SA || which == SS)
-		ft_swap(stack_a);
-	if (which == SB || which == SS)
-		ft_swap(stack_b);
-	if (which == SA)
-		write(1, "sa\n", 3);
-	else if (which == SB)
-		write(1, "sb\n", 3);
+	if (ft_check_order(a) != 0 && b->size == 0)
+		write(1, "OK\n", 3);
 	else
-		write(1, "ss\n", 3);
+		write(1, "KO\n", 3);
 }

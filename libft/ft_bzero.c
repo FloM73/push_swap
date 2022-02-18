@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/08/01 22:41:47 by flormich         ###   ########.fr       */
+/*   Created: 2021/05/13 11:49:50 by flormich          #+#    #+#             */
+/*   Updated: 2021/06/06 17:40:46 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-// Check asceding order (stack A)
-int	ft_check_order(t_stack *stack)
+/*
+**	Put '\0' in n bytes of the memory pointed by s
+*/
+
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	size_t	i;
 
+	if (!s)
+		return ;
 	i = 0;
-	while (i < stack->size - 1)
+	while (i < n)
 	{
-		if (stack->elt[i] < stack->elt[i + 1])
-			i++;
-		else
-			return (0);
+		((char *)(s))[i] = '\0';
+		i++;
 	}
-	return (i + 1);
-}
-
-// Create stack b
-t_stack	*ft_create_stack_b(t_stack *stack_a)
-{
-	t_stack	*b;
-
-	b = ft_calloc(1, sizeof(t_stack));
-	b->elt = ft_calloc(stack_a->size, sizeof(int));
-	b->size = 0;
-	return (b);
 }

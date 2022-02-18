@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/08/01 22:41:47 by flormich         ###   ########.fr       */
+/*   Created: 2021/05/13 11:49:21 by flormich          #+#    #+#             */
+/*   Updated: 2021/06/06 18:03:45 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-// Check asceding order (stack A)
-int	ft_check_order(t_stack *stack)
+/*
+* Copies n bytes of the memory pointed by src to dest
+* Memories areas MUST NOT overlap (if overlap use memmove)
+* return a pointer to dest
+*/
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*output;
+	unsigned char	*input;
 
+	output = (unsigned char *)dest;
+	input = (unsigned char *)src;
 	i = 0;
-	while (i < stack->size - 1)
+	while (i < n)
 	{
-		if (stack->elt[i] < stack->elt[i + 1])
-			i++;
-		else
-			return (0);
+		output[i] = input[i];
+		i++;
 	}
-	return (i + 1);
-}
-
-// Create stack b
-t_stack	*ft_create_stack_b(t_stack *stack_a)
-{
-	t_stack	*b;
-
-	b = ft_calloc(1, sizeof(t_stack));
-	b->elt = ft_calloc(stack_a->size, sizeof(int));
-	b->size = 0;
-	return (b);
+	return ((void *)output);
 }

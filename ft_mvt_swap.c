@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_mvt_swap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:30:12 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 18:29:06 by flormich         ###   ########.fr       */
+/*   Updated: 2021/08/01 22:30:19 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,19 @@ void	ft_swap(t_stack *stack)
 	stack->elt[1] = tmp;
 }
 
-void	ft_pilote_swap(t_stack *stack_a, t_stack *stack_b, int	which)
+void	ft_pilote_swap(t_stack *a, t_stack *b, int which, int print)
 {
 	if (which == SA || which == SS)
-		ft_swap(stack_a);
+		ft_swap(a);
 	if (which == SB || which == SS)
-		ft_swap(stack_b);
-	if (which == SA)
-		write(1, "sa\n", 3);
-	else if (which == SB)
-		write(1, "sb\n", 3);
-	else
-		write(1, "ss\n", 3);
+		ft_swap(b);
+	if (print == 1)
+	{
+		if (which == SA)
+			write(1, "sa\n", 3);
+		else if (which == SB)
+			write(1, "sb\n", 3);
+		else
+			write(1, "ss\n", 3);
+	}
 }

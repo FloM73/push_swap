@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/22 21:00:09 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/29 19:57:02 by flormich         ###   ########.fr       */
+/*   Created: 2021/08/01 22:32:12 by flormich          #+#    #+#             */
+/*   Updated: 2021/08/01 22:41:50 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,12 @@ t_chunk	*ft_find_last(t_chunk *lst)
 		return (lst);
 	}
 	return (NULL);
+}
+
+// Display error message and free Chunk_Liste
+void	ft_error(t_chunk *chunk)
+{
+	write(1, "Error\n", 6);
+	if (chunk)
+		ft_lstclear(&chunk);
 }

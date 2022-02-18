@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_mvt_rotate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:30:12 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 18:28:54 by flormich         ###   ########.fr       */
+/*   Updated: 2021/08/01 22:29:43 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ static void	ft_rotate(t_stack *stack)
 	stack->elt[stack->size - 1] = tmp;
 }
 
-void	ft_pilote_rotate(t_stack *stack_a, t_stack *stack_b, int	which)
+void	ft_pilote_rotate(t_stack *a, t_stack *b, int which, int print)
 {
 	if (which == RA || which == RR)
-		ft_rotate(stack_a);
+		ft_rotate(a);
 	if (which == RB || which == RR)
-		ft_rotate(stack_b);
-	if (which == RA)
-		write(1, "ra\n", 3);
-	else if (which == RB)
-		write(1, "rb\n", 3);
-	else
-		write(1, "rr\n", 3);
+		ft_rotate(b);
+	if (print == 1)
+	{
+		if (which == RA)
+			write(1, "ra\n", 3);
+		else if (which == RB)
+			write(1, "rb\n", 3);
+		else
+			write(1, "rr\n", 3);
+	}
 }

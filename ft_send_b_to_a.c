@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 14:25:28 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/29 20:33:52 by flormich         ###   ########.fr       */
+/*   Updated: 2021/08/01 21:58:52 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_count_elt_big(t_stack *s, t_chunk*chk)
 
 static void	ft_search_big(t_stack *b, t_chunk *chk)
 {
-	ft_pilote_rotate(NULL, b, RB);
+	ft_pilote_rotate(NULL, b, RB, 1);
 	chk->nb_b_rotate++;
 }
 
@@ -38,7 +38,7 @@ static void	ft_rotate_too_small_a(t_stack *a, t_stack *b, t_chunk *chk)
 {
 	while (a->size > 1 && b->elt[0] > a->elt[0])
 	{
-		ft_pilote_rotate(a, NULL, RA);
+		ft_pilote_rotate(a, NULL, RA, 1);
 		chk->nb_a_rotate++;
 	}
 }
@@ -53,20 +53,20 @@ static void	ft_move_chk_b_to_a(t_stack *a, t_stack *b, t_chunk *chk, int nb_big)
 		while (count_big < nb_big && b->elt[0] <= chk->sum / chk->nb_elt_total)
 			ft_search_big(b, chk);
 		if (b->elt[0] > chk->min && b->elt[0] < b->elt[1] && b->size > 1)
-			ft_pilote_swap(NULL, b, SB);
+			ft_pilote_swap(NULL, b, SB, 1);
 		while (chk->nb_b_rotate > 0 && b->elt[b->size - 1] > b->elt[0])
 		{
-			ft_pilote_rrotate(NULL, b, RRB);
+			ft_pilote_rrotate(NULL, b, RRB, 1);
 			chk->nb_b_rotate--;
 		}
 		if (b->elt[0] > a->elt[0] && a->size > 0)
 			ft_rotate_too_small_a(a, b, chk);
 		while (chk->nb_a_rotate > 0 && a->elt[a->size - 1] > b->elt[0])
 		{
-			ft_pilote_rrotate(a, NULL, RRA);
+			ft_pilote_rrotate(a, NULL, RRA, 1);
 			chk->nb_a_rotate--;
 		}
-		ft_pilote_push(a, b, PA);
+		ft_pilote_push(a, b, PA, 1);
 		chk->nb_elt_curent--;
 		count_big++;
 	}
@@ -86,7 +86,7 @@ void	ft_send_b_to_a(t_stack *a, t_stack *b, t_chunk *chunk)
 				ft_move_chk_b_to_a(a, b, chk, ft_count_elt_big(b, chk));
 				while (chk->nb_a_rotate > 0)
 				{
-					ft_pilote_rrotate(a, NULL, RRA);
+					ft_pilote_rrotate(a, NULL, RRA, 1);
 					chk->nb_a_rotate--;
 				}
 			}

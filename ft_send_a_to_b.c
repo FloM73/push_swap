@@ -6,7 +6,7 @@
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 14:25:28 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/29 16:15:23 by flormich         ###   ########.fr       */
+/*   Updated: 2021/08/01 21:58:15 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ static void	ft_move_from_top(t_stack *a, t_stack *b, t_chunk *chk)
 	while (chk->nb_elt_curent < chk->nb_elt_total)
 	{
 		if (a->elt[0] < chk->min || a->elt[0] > chk->max)
-			ft_pilote_rotate(a, NULL, RA);
+			ft_pilote_rotate(a, NULL, RA, 1);
 		else
 		{
-			ft_pilote_push(a, b, PB);
+			ft_pilote_push(a, b, PB, 1);
 			chk->nb_elt_curent++;
 		}
 		if (b->elt[0] == chk->max_ist && b->size > 1)
-			ft_pilote_rotate(NULL, b, RB);
+			ft_pilote_rotate(NULL, b, RB, 1);
 	}
 }
 
@@ -58,15 +58,15 @@ static void	ft_move_from_bottom(t_stack *a, t_stack *b, t_chunk *chk)
 	{
 		i = a->size - 1;
 		if (a->elt[i] < chk->min || a->elt[i] > chk->max)
-			ft_pilote_rrotate(a, NULL, RRA);
+			ft_pilote_rrotate(a, NULL, RRA, 1);
 		else
 		{
-			ft_pilote_rrotate(a, NULL, RRA);
-			ft_pilote_push(a, b, PB);
+			ft_pilote_rrotate(a, NULL, RRA, 1);
+			ft_pilote_push(a, b, PB, 1);
 			chk->nb_elt_curent++;
 		}
 		if (b->elt[0] == chk->max_ist && b->size > 1)
-			ft_pilote_rotate(NULL, b, RB);
+			ft_pilote_rotate(NULL, b, RB, 1);
 	}
 }
 
@@ -85,7 +85,7 @@ static void	ft_move_chk(t_stack *a, t_stack *b, t_chunk *chk)
 		{
 			while (a->elt[a->size - 1] >= chk->min
 				&& a->elt[a->size - 1] <= chk->max)
-				ft_pilote_rrotate(a, NULL, RRA);
+				ft_pilote_rrotate(a, NULL, RRA, 1);
 		}
 		if (index_first <= index_last)
 			ft_move_from_top(a, b, chk);
@@ -93,7 +93,7 @@ static void	ft_move_chk(t_stack *a, t_stack *b, t_chunk *chk)
 			ft_move_from_bottom(a, b, chk);
 	}
 	if (b->size > 1)
-		ft_pilote_rrotate(NULL, b, RRB);
+		ft_pilote_rrotate(NULL, b, RRB, 1);
 }
 
 // Send a to b, chunk after chunk

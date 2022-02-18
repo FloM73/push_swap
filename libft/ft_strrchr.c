@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 14:03:14 by flormich          #+#    #+#             */
-/*   Updated: 2021/08/01 22:41:47 by flormich         ###   ########.fr       */
+/*   Created: 2021/05/14 15:11:12 by flormich          #+#    #+#             */
+/*   Updated: 2021/07/31 14:05:25 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-// Check asceding order (stack A)
-int	ft_check_order(t_stack *stack)
+/*
+* Search for the last ocurence of c in a string s
+* Return a pointer to the last occurence of c
+* Return NULL if c is not found
+*/
+
+char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	char	*str;
+	int		n;
+	int		i;
 
+	str = (char *)s;
+	n = ft_strlen(str);
 	i = 0;
-	while (i < stack->size - 1)
+	while (n >= 0)
 	{
-		if (stack->elt[i] < stack->elt[i + 1])
-			i++;
-		else
-			return (0);
+		if (str[n] == c)
+		{
+			while (i < n)
+			{
+				str++;
+				i++;
+			}
+			return (str);
+		}
+		n--;
 	}
-	return (i + 1);
-}
-
-// Create stack b
-t_stack	*ft_create_stack_b(t_stack *stack_a)
-{
-	t_stack	*b;
-
-	b = ft_calloc(1, sizeof(t_stack));
-	b->elt = ft_calloc(stack_a->size, sizeof(int));
-	b->size = 0;
-	return (b);
+	return (NULL);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push.c                                          :+:      :+:    :+:   */
+/*   ft_mvt_push.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flormich <flormich@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 20:30:12 by flormich          #+#    #+#             */
-/*   Updated: 2021/07/28 19:58:06 by flormich         ###   ########.fr       */
+/*   Updated: 2021/08/01 22:29:25 by flormich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ static void	ft_push(t_stack *from, t_stack *to)
 	from->elt[from->size] = '\0';
 }
 
-void	ft_pilote_push(t_stack *stack_a, t_stack *stack_b, int	which)
+void	ft_pilote_push(t_stack *a, t_stack *b, int which, int print)
 {
 	if (which == PA)
-		ft_push(stack_b, stack_a);
+		ft_push(b, a);
 	if (which == PB)
-		ft_push(stack_a, stack_b);
-	if (which == PA)
-		write(1, "pa\n", 3);
-	else if (which == PB)
-		write(1, "pb\n", 3);
+		ft_push(a, b);
+	if (print == 1)
+	{
+		if (which == PA)
+			write(1, "pa\n", 3);
+		else if (which == PB)
+			write(1, "pb\n", 3);
+	}
 }
